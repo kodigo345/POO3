@@ -12,5 +12,9 @@ class Cuenta:
     def depositar(self, valor):
         self.saldo += valor
         
-    def retirar(self, valor):
-        self.saldo -= valor
+    def retirar(self, monto):
+        if self.saldo >= monto:
+            self.saldo -= monto
+            print(f"Retiro exitoso. Saldo restante: ${self.saldo}")
+        else:
+            print("No tiene suficiente saldo para retirar.")
