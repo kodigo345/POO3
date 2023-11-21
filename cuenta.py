@@ -1,20 +1,33 @@
 class Cuenta:
     def __init__(self, numero, titular, saldo, limite):
         print("Construyendo el objeto...{}".format(self))
-        self.numero = numero
-        self.titular = titular
-        self.saldo = saldo
-        self.limite = limite
+        self.__numero = numero
+        self.__titular = titular
+        self.__saldo = saldo
+        self.__limite = limite
         
     def extracto(self):
-        print('saldo {} del titular {}'.format(self.saldo, self.titular))
+        print('Saldo {} del titular {}'.format(self.__saldo, self.__titular))
         
     def depositar(self, valor):
-        self.saldo += valor
+        self.__saldo += valor
         
-    def retirar(self, monto):
-        if self.saldo >= monto:
-            self.saldo -= monto
-            print(f"Retiro exitoso. Saldo restante: ${self.saldo}")
-        else:
-            print("No tiene suficiente saldo para retirar.")
+    def retirar(self, valor):
+        self.__saldo -= valor
+        
+    def transferir(self, valor, destino):
+        self.retirar(valor)
+        destino.depositar(valor)
+        
+    def get_saldo(self):
+        return self.__saldo
+
+    def get_titular(self):
+        return self.__titular
+
+    @property
+    def limite(self):
+        return self.__limite
+    
+    @limite.setter
+    def limite(self, limite):
